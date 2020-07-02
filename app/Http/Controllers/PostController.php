@@ -19,7 +19,7 @@ class PostController extends Controller
         //$posts = Post::simplePaginate(4);
 
         return view('posts.index', [
-            'posts' => Post::paginate(4)
+            'posts' => Post::paginate(6)
             ]);
     }
 
@@ -57,10 +57,7 @@ class PostController extends Controller
 
         //dd($request->all());
 
-        $post = request()->validate([
-            'title' => 'required|min:3',
-            'body' => 'required'
-        ]);
+        $post = $this->validateRequest();
 
         //dd($attr);
 
@@ -106,10 +103,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $attr = request()->validate([
-            'title' => 'required|min:3',
-            'body' => 'required'
-        ]);
+        $attr = $this->validateRequest();
 
         //$attr['slug'] = \Str::slug(request('title'));
 
@@ -128,5 +122,13 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function validateRequest()
+    {
+        return request()->validate([
+            'title' => 'required|min:3',
+            'body' => 'required'
+        ]);
     }
 }
