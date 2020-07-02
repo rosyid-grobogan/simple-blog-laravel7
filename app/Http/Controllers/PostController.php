@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function store(Request $request)
-    public function store()
+    public function store(PostRequest $postRequest)
     {
         //dd($request);
         // $post = new Post;
@@ -57,7 +58,7 @@ class PostController extends Controller
 
         //dd($request->all());
 
-        $post = $this->validateRequest();
+        $post = $postRequest->all();
 
         //dd($attr);
 
@@ -101,9 +102,9 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $postRequest, Post $post)
     {
-        $attr = $this->validateRequest();
+        $attr = $postRequest->all();
 
         //$attr['slug'] = \Str::slug(request('title'));
 
@@ -124,11 +125,4 @@ class PostController extends Controller
         //
     }
 
-    public function validateRequest()
-    {
-        return request()->validate([
-            'title' => 'required|min:3',
-            'body' => 'required'
-        ]);
-    }
 }
