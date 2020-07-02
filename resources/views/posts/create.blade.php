@@ -20,24 +20,7 @@
 
             <form action="/posts/store" method="post">
                 @csrf
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Title</label>
-                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                        id="exampleFormControlInput1" placeholder="Title ..">
-                    @error('title')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-
-
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Post</label>
-                    <textarea name="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Create</button>
+                @include('posts.partials.form-control', ['submit' => 'Create'])
             </form>
         </div>
     </div>

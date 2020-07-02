@@ -16,12 +16,12 @@ class PostController extends Controller
     public function index()
     {
         //return Post::get(['title', 'slug']);
-       // $posts = Post::paginate(4);
+        // $posts = Post::paginate(4);
         //$posts = Post::simplePaginate(4);
 
         return view('posts.index', [
             'posts' => Post::paginate(6)
-            ]);
+        ]);
     }
 
     /**
@@ -31,7 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create', ['post' => new Post()]);
     }
 
     /**
@@ -124,5 +124,4 @@ class PostController extends Controller
     {
         //
     }
-
 }
