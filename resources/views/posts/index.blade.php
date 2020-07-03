@@ -25,9 +25,15 @@
             @endif
 
         </div>
+        @if(Auth::check())
         <div>
-            <a href="/posts/create" class="btn btn-primary">New Post</a>
+            <a href="{{ route('posts.create') }}" class="btn btn-primary">New Post</a>
         </div>
+        @else
+        <div>
+            <a href="{{ route('login') }}" class="btn btn-primary">Login to create new post</a>
+        </div>
+        @endif
     </div>
 </div>
 
@@ -57,6 +63,7 @@
         <div class="card-footer">
             <small class="text-muted">Published on {{ $post->created_at->format("d F, Y") }}</small>
         </div>
+        @auth
         <div class="card-footer">
             <div class="d-flex justify-content-between">
                 <form action="{{ route('posts', $post->slug) }}/delete" method="post">
@@ -67,6 +74,7 @@
                 <a href="{{ route('posts', $post->slug) }}/edit" class="btn btn-info">Edit</a>
             </div>
         </div>
+        @endauth
     </div>
 
     @empty

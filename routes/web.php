@@ -17,13 +17,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('posts', 'PostController@index')->name('posts.index');
-Route::get('posts/create', 'PostController@create')->name('posts.create  ');
-Route::post('posts/store', 'PostController@store');
 
-Route::get('posts/{post:slug}/edit', 'PostController@edit');
-Route::patch('posts/{post:slug}/edit', 'PostController@update');
-Route::delete('posts/{post:slug}/delete', 'PostController@destroy');
+Route::middleware('auth')->group( function () {
+
+    Route::get('posts/create', 'PostController@create')->name('posts.create');
+    Route::post('posts/store', 'PostController@store');
+
+    Route::get('posts/{post:slug}/edit', 'PostController@edit');
+    Route::patch('posts/{post:slug}/edit', 'PostController@update');
+    Route::delete('posts/{post:slug}/delete', 'PostController@destroy');
+});
+
+Route::get('posts', 'PostController@index')->name('posts.index');
 Route::get('categories/{category:slug}', 'CategoryController@show')->name('categories');
 Route::get('tags/{tag:slug}', 'TagController@show');
 Route::get('posts/{post:slug}', 'PostController@show')->name('posts');
