@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('posts', 'PostController@index');
-Route::get('posts/create', 'PostController@create');
+Route::get('posts', 'PostController@index')->name('posts.index');
+Route::get('posts/create', 'PostController@create')->name('posts.create  ');
 Route::post('posts/store', 'PostController@store');
 
 Route::get('posts/{post:slug}/edit', 'PostController@edit');
@@ -27,3 +27,7 @@ Route::delete('posts/{post:slug}/delete', 'PostController@destroy');
 Route::get('categories/{category:slug}', 'CategoryController@show')->name('categories');
 Route::get('tags/{tag:slug}', 'TagController@show');
 Route::get('posts/{post:slug}', 'PostController@show')->name('posts');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
