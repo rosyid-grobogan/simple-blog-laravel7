@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    //protected $fillable = ['title', 'slug', 'body'];
+    protected $fillable = ['title', 'slug', 'body', 'category_id'];
 
-    protected $guarded = [];
+    //protected $guarded = [];
     public function scopeLatestFirst()
     {
         return $this->latest()->first();

@@ -1,3 +1,6 @@
+## We Learn about:
+- [Select 2](https://select2.org/)
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
