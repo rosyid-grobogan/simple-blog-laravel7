@@ -6,7 +6,11 @@
 
         <div class="text-secondary">
             <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a> on
-            {{ $post->created_at->format("d F, Y") }}</small>
+            {{ $post->created_at->format("d F, Y") }}
+            @foreach ($post->tags as $tag)
+            <a href="#"><span class="badge badge-primary">{{ $tag->name }} <span
+                        class="badge badge-pill badge-light">{{ $tag->count() }}</span></span></a>
+            @endforeach
         </div>
         <hr>
     </div>
