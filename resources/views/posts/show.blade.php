@@ -8,8 +8,7 @@
             <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a> on
             {{ $post->created_at->format("d F, Y") }}
             @foreach ($post->tags as $tag)
-            <a href="#"><span class="badge badge-primary">{{ $tag->name }} <span
-                        class="badge badge-pill badge-light">{{ $tag->count() }}</span></span></a>
+            <a href="/tags/{{ $tag->slug }}"><span class="badge badge-primary">{{ $tag->name }} </a>
             @endforeach
         </div>
         <hr>
