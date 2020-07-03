@@ -13,4 +13,10 @@ class Post extends Model
     {
         return $this->latest()->first();
     }
+
+    public function category()
+    {
+        //return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class);
+    }
 }

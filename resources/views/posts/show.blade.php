@@ -1,9 +1,15 @@
 @extends('layouts.master')
 @section('content')
 <div class="row">
-    <h1 class="display-3">{{ $post->title }}</h1>
-<p>{{ $post->body }}</p>
-    <p>
+    <div class="col-md-12">
+        <h1>{{ $post->title }}</h1>
+        <div class="text-secondary">
+            {{ $post->category->name }}
+        </div>
+    </div>
+    <div class="col-md-12">
+        <p>{{ $post->body }}</p>
+    </div>
 </div>
 <hr>
 @endsection
