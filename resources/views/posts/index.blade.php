@@ -14,7 +14,12 @@
 <div class="container">
     <div class="row justify-content-between">
         <div>
-            <h4 class="btn outline">All Post</h4>
+            @isset ($category)
+            <h4>Category: {{ $category->name }}</h4>
+            @else
+            <h4>All Post</h4>
+            @endisset
+
         </div>
         <div>
             <a href="/posts/create" class="btn btn-primary">New Post</a>
@@ -36,12 +41,13 @@
         <div class="card-body">
             <h5 class="card-title">{{$post->title}}</h5>
             <div class="text-secondary">
-                {{ $post->category->name }}
+                <a href="{{ route('categories', $post->category->slug) }}">{{ $post->category->name }}</a>
             </div>
 
             <p class="card-text">{{Str::limit( $post->body, 100, '') }} </p>
 
-            <a class="btn btn-secondary btn-sm" href="posts/{{ $post->slug }}" role="button">See more &raquo;</a>
+            <a class="btn btn-secondary btn-sm" href="{{ route('posts', $post->slug) }}" role="button">See more
+                &raquo;</a>
 
         </div>
         <div class="card-footer">
@@ -49,12 +55,12 @@
         </div>
         <div class="card-footer">
             <div class="d-flex justify-content-between">
-                <form action="/posts/{{ $post->slug }}/delete" method="post">
+                <form action="{{ route('posts', $post->slug) }}/delete" method="post">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-                <a href="/posts/{{ $post->slug }}/edit" class="btn btn-info">Edit</a>
+                <a href="{{ route('posts', $post->slug) }}/edit" class="btn btn-info">Edit</a>
             </div>
         </div>
     </div>
