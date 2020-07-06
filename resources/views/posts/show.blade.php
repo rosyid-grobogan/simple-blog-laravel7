@@ -11,7 +11,22 @@
             <a href="/tags/{{ $tag->slug }}"><span class="badge badge-primary">{{ $tag->name }} </a>
             @endforeach
         </div>
+        <div class="text-secondary">
+            Wrote by {{ $post->author->name }}
+        </div>
+        @if(auth()->user()->id == $post->user_id)
+        <div class="d-flex justify-content-between">
+            <form action="{{ route('posts', $post->slug) }}/delete" method="post">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <a href="{{ route('posts', $post->slug) }}/edit" class="btn btn-info">Edit</a>
+        </div>
+        @endif
         <hr>
+
+
     </div>
 
     <div class="col-md-12">

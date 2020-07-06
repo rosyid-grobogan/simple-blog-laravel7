@@ -52,9 +52,12 @@ class PostController extends Controller
         $attr = $postRequest->all();
         $attr['slug'] = \Str::slug(request('title'));
         $attr['category_id'] = request('category');
+        // $attr['user_id'] = auth()->id(); // cara 1
+        $attr['thumbnail'] = 'user.png';
 
-        dd($attr);
-        $post = Post::create($attr);
+        //dd($attr);
+        // $post = Post::create($attr);
+        $post = auth()->user()->posts()->create($attr); // cara d2
         $post->tags()->attach(request('tags'));
 
         session()->flash('success', 'The post was created');
@@ -98,6 +101,7 @@ class PostController extends Controller
     {
         $attr = $postRequest->all();
         $attr['category_id'] = request('category');
+        $attr['user_id'] = auth()->id();
 
         $post->update($attr);
         $post->tags()->sync(request('tags'));
@@ -114,9 +118,15 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->tags()->detach();
-        $post->delete();
-        session()->flash("success", "The post was deleted");
-        return redirect('posts');
+        if (auth()->user()->is($post->author())) {
+            $post->tags()->detach();
+            $post->delete();
+            session()->flash("success", "The post was deleted");
+            return redirect('posts');
+        } else {
+            session()->flash("error", "It wasn't your post");
+            return redirect('posts');
+        }
+
     }
 }
