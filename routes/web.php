@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 
-Route::middleware('auth')->group( function () {
+Route::middleware('auth')->group(function () {
 
     Route::get('posts/create', 'PostController@create')->name('posts.create');
     Route::post('posts/store', 'PostController@store');
@@ -31,7 +31,7 @@ Route::middleware('auth')->group( function () {
 Route::get('posts', 'PostController@index')->name('posts.index');
 Route::get('categories/{category:slug}', 'CategoryController@show')->name('categories');
 Route::get('tags/{tag:slug}', 'TagController@show');
-Route::get('posts/{post:slug}', 'PostController@show')->name('posts');
+Route::get('posts/{post:slug}', 'PostController@show')->name('posts.show');
 
 Auth::routes();
 

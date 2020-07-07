@@ -25,7 +25,8 @@
         @endcan
         <hr>
     </div>
-    <img src="{{ $post->takeImage }}" alt="{{ $post->slug }}" class="card-image-top">
+    <img src="{{ $post->takeImage }}" alt="{{ $post->slug }}" class="card-image-top"
+        style="height: 570px; object-fit: cover; object-position: center;">
     <div class="col-md-12">
         <p>{{ $post->body }}</p>
     </div>
