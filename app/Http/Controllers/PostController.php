@@ -48,12 +48,24 @@ class PostController extends Controller
     public function store(PostRequest $postRequest)
     //public function store()
     {
-        //dd(request('tags'));
+        //dd(request()->file('thumbnail'));
         $attr = $postRequest->all();
-        $attr['slug'] = \Str::slug(request('title'));
+        $slug = \Str::slug(request('title'));
+        $attr['slug'] = $slug;
+
+        if (request()->file('thumbnail')) {
+            $thumbnailUrl = request()->file('thumbnail')->store('images/posts');
+        } else {
+            $thumbnailUrl = 'images/posts/no-post.png';
+        }
+        $thumbnail = request()->file('thumbnail');
+        $thumbnailUrl = $thumbnail->store('images/posts');
+
+
         $attr['category_id'] = request('category');
+        $attr['thumbnail'] = $thumbnailUrl;
         // $attr['user_id'] = auth()->id(); // cara 1
-        $attr['thumbnail'] = 'user.png';
+
 
         //dd($attr);
         // $post = Post::create($attr);
@@ -100,9 +112,19 @@ class PostController extends Controller
     public function update(PostRequest $postRequest, Post $post)
     {
         $this->authorize('update', $post);
-        $attr = $postRequest->all();
+        //$attr = $postRequest->all();
+
+        // remove image when updated
+        if (request()->file('thumbnail')) {
+            \Storage::delete($post->thumbnail);
+            $thumbnailUrl = request()->file('thumbnail')->store('images/posts');
+        } else {
+            $thumbnailUrl = $post->thumbnail;
+        }
+
         $attr['category_id'] = request('category');
-        $attr['user_id'] = auth()->id();
+        $attr['thumbnail'] = $thumbnailUrl;
+        //$attr['user_id'] = auth()->id();
 
         $post->update($attr);
         $post->tags()->sync(request('tags'));
@@ -120,11 +142,13 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $this->authorize('delete', $post);
+        // remove image when post is deleted
+        \Storage::delete($post->thumbnail);
         // if (auth()->user()->is($post->author())) {
-            $post->tags()->detach();
-            $post->delete();
-            session()->flash("success", "The post was deleted");
-            return redirect('posts');
+        $post->tags()->detach();
+        $post->delete();
+        session()->flash("success", "The post was deleted");
+        return redirect('posts');
         // } else {
         //     session()->flash("error", "It wasn't your post");
         //     return redirect('posts');

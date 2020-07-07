@@ -18,7 +18,7 @@
         <div class="col-md-12">
 
 
-            <form action="/posts/{{ $post->slug }}/edit" method="post">
+            <form action="/posts/{{ $post->slug }}/edit" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('patch')
                 @include('posts.partials.form-control')

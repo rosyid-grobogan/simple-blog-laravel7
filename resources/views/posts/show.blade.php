@@ -15,22 +15,23 @@
             Wrote by {{ $post->author->name }}
         </div>
         {{-- @if(auth()->user()->id == $post->user_id) --}}
+        @can('delete', $post)
         <div class="d-flex justify-content-between">
-            @can('delete', $post)
             <form action="{{ route('posts', $post->slug) }}/delete" method="post">
                 @csrf
                 @method('delete')
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-            @endcan
             <a href="{{ route('posts', $post->slug) }}/edit" class="btn btn-info">Edit</a>
         </div>
+        @endcan
         {{-- @endif --}}
         <hr>
 
 
     </div>
 
+    <img src="{{ $post->takeImage }}" alt="{{ $post->slug }}" class="card-image-top">
     <div class="col-md-12">
         <p>{{ $post->body }}</p>
     </div>

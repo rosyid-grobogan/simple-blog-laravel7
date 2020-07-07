@@ -1,6 +1,12 @@
-@php
-//dd($post->tags)
-@endphp
+<div class="form-group">
+    <input type="file" name="thumbnail" id="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror">
+    @error('thumbnail')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
+</div>
+
 <div class="form-group">
     <label for="title">Title</label>
     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title"

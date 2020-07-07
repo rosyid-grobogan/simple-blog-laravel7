@@ -29,4 +29,16 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    // cara 1 dengan menjadikan atribut
+    public function getTakeImageAttribute()
+    {
+        return '/storage/' . $this->thumbnail;
+    }
+
+    // cara 2 dengan menjadikan method
+    public function getImage()
+    {
+        return '/storage/' . $this->thumbnail;
+    }
 }
