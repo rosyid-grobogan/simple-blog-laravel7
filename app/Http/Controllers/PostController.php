@@ -99,6 +99,7 @@ class PostController extends Controller
      */
     public function update(PostRequest $postRequest, Post $post)
     {
+        $this->authorize('update', $post);
         $attr = $postRequest->all();
         $attr['category_id'] = request('category');
         $attr['user_id'] = auth()->id();
@@ -118,15 +119,16 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if (auth()->user()->is($post->author())) {
+        $this->authorize('delete', $post);
+        // if (auth()->user()->is($post->author())) {
             $post->tags()->detach();
             $post->delete();
             session()->flash("success", "The post was deleted");
             return redirect('posts');
-        } else {
-            session()->flash("error", "It wasn't your post");
-            return redirect('posts');
-        }
+        // } else {
+        //     session()->flash("error", "It wasn't your post");
+        //     return redirect('posts');
+        // }
 
     }
 }

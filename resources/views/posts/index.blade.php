@@ -63,7 +63,7 @@
         <div class="card-footer">
             <small class="text-muted">Published on {{ $post->created_at->format("d F, Y") }}</small>
         </div>
-        @auth
+        @can('update', $post)
         <div class="card-footer">
             <div class="d-flex justify-content-between">
                 <form action="{{ route('posts', $post->slug) }}/delete" method="post">
@@ -74,7 +74,7 @@
                 <a href="{{ route('posts', $post->slug) }}/edit" class="btn btn-info">Edit</a>
             </div>
         </div>
-        @endauth
+        @endcan
     </div>
 
     @empty
