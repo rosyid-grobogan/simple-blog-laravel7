@@ -16,8 +16,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-
-
             <form action="/posts/store" method="post" enctype="multipart/form-data">
                 @csrf
                 @include('posts.partials.form-control', ['submit' => 'Create'])

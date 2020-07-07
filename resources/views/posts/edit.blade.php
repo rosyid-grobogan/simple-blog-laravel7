@@ -16,8 +16,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-
-
             <form action="/posts/{{ $post->slug }}/edit" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('patch')

@@ -46,9 +46,7 @@ class PostController extends Controller
      */
 
     public function store(PostRequest $postRequest)
-    //public function store()
     {
-        //dd(request()->file('thumbnail'));
         $attr = $postRequest->all();
         $slug = \Str::slug(request('title'));
         $attr['slug'] = $slug;
@@ -61,14 +59,9 @@ class PostController extends Controller
         $thumbnail = request()->file('thumbnail');
         $thumbnailUrl = $thumbnail->store('images/posts');
 
-
         $attr['category_id'] = request('category');
         $attr['thumbnail'] = $thumbnailUrl;
-        // $attr['user_id'] = auth()->id(); // cara 1
 
-
-        //dd($attr);
-        // $post = Post::create($attr);
         $post = auth()->user()->posts()->create($attr); // cara d2
         $post->tags()->attach(request('tags'));
 
@@ -112,8 +105,6 @@ class PostController extends Controller
     public function update(PostRequest $postRequest, Post $post)
     {
         $this->authorize('update', $post);
-        //$attr = $postRequest->all();
-
         // remove image when updated
         if (request()->file('thumbnail')) {
             \Storage::delete($post->thumbnail);
@@ -124,7 +115,6 @@ class PostController extends Controller
 
         $attr['category_id'] = request('category');
         $attr['thumbnail'] = $thumbnailUrl;
-        //$attr['user_id'] = auth()->id();
 
         $post->update($attr);
         $post->tags()->sync(request('tags'));
@@ -144,15 +134,10 @@ class PostController extends Controller
         $this->authorize('delete', $post);
         // remove image when post is deleted
         \Storage::delete($post->thumbnail);
-        // if (auth()->user()->is($post->author())) {
+
         $post->tags()->detach();
         $post->delete();
         session()->flash("success", "The post was deleted");
         return redirect('posts');
-        // } else {
-        //     session()->flash("error", "It wasn't your post");
-        //     return redirect('posts');
-        // }
-
     }
 }

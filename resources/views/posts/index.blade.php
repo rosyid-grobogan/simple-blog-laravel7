@@ -23,7 +23,6 @@
             @if (!isset($category) && !isset($tag))
             <h4>All Post</h4>
             @endif
-
         </div>
         @if(Auth::check())
         <div>
@@ -37,25 +36,19 @@
     </div>
 </div>
 
-
 <div class="row">
-
     @forelse ($posts as $post)
     <div class="card mx-4 mb-4" style="width: 18rem;">
         <img src="{{ $post->takeImage }}" alt="{{ $post->slug }}" class="card-image-top"
-        style="height: 270px; object-fit: cover; object-position: center;"
-        >
+            style="height: 270px; object-fit: cover; object-position: center;">
         <div class="card-body">
             <h5 class="card-title">{{$post->title}}</h5>
             <div class="text-secondary">
                 <a href="{{ route('categories', $post->category->slug) }}">{{ $post->category->name }}</a>
             </div>
-
             <p class="card-text">{{Str::limit( $post->body, 100, '') }} </p>
-
             <a class="btn btn-secondary btn-sm" href="{{ route('posts', $post->slug) }}" role="button">See more
                 &raquo;</a>
-
         </div>
         <div class="card-footer">
             <small class="text-muted">Published on {{ $post->created_at->format("d F, Y") }}</small>
@@ -73,7 +66,6 @@
         </div>
         @endcan
     </div>
-
     @empty
     <div class="col-md-4">
         <div class="alert alert-info">
@@ -81,15 +73,9 @@
         </div>
     </div>
     @endforelse
-
-
-
-
 </div>
 <div class="d-flex justify-content-center">
     {{ $posts->links() }}
 </div>
-
-
 <hr>
 @endsection

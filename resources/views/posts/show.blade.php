@@ -3,7 +3,6 @@
 <div class="row">
     <div class="col-md-12">
         <h1>{{ $post->title }}</h1>
-
         <div class="text-secondary">
             <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a> on
             {{ $post->created_at->format("d F, Y") }}
@@ -14,7 +13,6 @@
         <div class="text-secondary">
             Wrote by {{ $post->author->name }}
         </div>
-        {{-- @if(auth()->user()->id == $post->user_id) --}}
         @can('delete', $post)
         <div class="d-flex justify-content-between">
             <form action="{{ route('posts', $post->slug) }}/delete" method="post">
@@ -25,12 +23,8 @@
             <a href="{{ route('posts', $post->slug) }}/edit" class="btn btn-info">Edit</a>
         </div>
         @endcan
-        {{-- @endif --}}
         <hr>
-
-
     </div>
-
     <img src="{{ $post->takeImage }}" alt="{{ $post->slug }}" class="card-image-top">
     <div class="col-md-12">
         <p>{{ $post->body }}</p>

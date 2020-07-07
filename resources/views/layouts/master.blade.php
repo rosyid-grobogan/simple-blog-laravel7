@@ -8,7 +8,6 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
     <title>{{ $title ?? 'Blog' }}</title>
-
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->
@@ -24,7 +23,6 @@
     <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
     <meta name="theme-color" content="#563d7c"> --}}
 
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -33,8 +31,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Select 2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-
-
 
     <style>
         .bd-placeholder-img {
@@ -52,31 +48,21 @@
             }
         }
     </style>
-    <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
 </head>
 
 <body>
     @include('includes.navigation')
     <main role="main">
-
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-
         @yield('jumbotron')
-
         <div class="container py-4">
-            <!-- Example row of columns -->
             @include('includes.alert')
             @yield('content')
-
         </div> <!-- /container -->
-
     </main>
-
     <footer class="container">
         <p>&copy; Company 2017-2020</p>
     </footer>
-    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     @include('includes.script')
 </body>
