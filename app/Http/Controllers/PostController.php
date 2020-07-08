@@ -19,8 +19,11 @@ class PostController extends Controller
      */
     public function index()
     {
+        //return Post::latest()->get();
+        //return Post::with('author', 'category', 'tags')->latest()->get();
         return view('posts.index', [
-            'posts' => Post::latest()->paginate(6)
+            //'posts' => Post::latest()->paginate(6)
+            'posts' => Post::with('author', 'category', 'tags')->latest()->paginate(3)
         ]);
     }
 
@@ -77,7 +80,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show', compact('post'));
+        $posts = Post::with('author', 'category', 'tags')->where('category_id', $post->category_id)->latest()->limit(3)->get();
+        return view('posts.show', compact('post', 'posts'));
     }
 
     /**

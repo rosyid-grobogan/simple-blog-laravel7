@@ -82,8 +82,6 @@
                 There are no posts.
             </div>
         </div>
-
-
         @endforelse
     </div>
 </div>

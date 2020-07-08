@@ -14,7 +14,10 @@
                 <li class="nav-item">
                     <a href="{{ route('posts.index') }}" class="nav-link">Post</a>
                 </li>
+
+                </li>
             </ul>
+
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
