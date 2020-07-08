@@ -48,7 +48,7 @@
             <div class="card-body">
                 <div class="text-secondary">
                     <a class="text-dark"
-                        href="{{ route('categories', $post->category->slug) }}">{{ $post->category->name }}</a>
+                        href="{{ route('categories.show', $post->category->slug) }}">{{ $post->category->name }}</a>
                 </div>
                 <h5 class="card-title"><a class="text-dark"
                         href="{{ route('posts.show', $post->slug) }}">{{$post->title}}</a></h5>
@@ -71,7 +71,7 @@
                         @method('delete')
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
-                    <a href="{{ route('posts', $post->slug) }}/edit" class="btn btn-info">Edit</a>
+                    <a href="{{ route('posts.show', $post->slug) }}/edit" class="btn btn-info">Edit</a>
                 </div>
             </div>
             @endcan

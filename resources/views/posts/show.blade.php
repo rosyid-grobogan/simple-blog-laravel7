@@ -13,22 +13,24 @@
         <div class="text-secondary">
             Wrote by {{ $post->author->name }}
         </div>
+
         @can('delete', $post)
         <div class="d-flex justify-content-between">
-            <form action="{{ route('posts', $post->slug) }}/delete" method="post">
+            <form action="{{ route('posts.destroy', $post->slug) }}" method="post">
                 @csrf
                 @method('delete')
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-            <a href="{{ route('posts', $post->slug) }}/edit" class="btn btn-info">Edit</a>
+            <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-info">Edit</a>
         </div>
         @endcan
+
         <hr>
     </div>
     <img src="{{ $post->takeImage }}" alt="{{ $post->slug }}" class="card-image-top"
         style="height: 570px; object-fit: cover; object-position: center;">
-    <div class="col-md-12">
-        <p>{{ $post->body }}</p>
+    <div class="col-md-12 mt-4">
+        <p>{!! nl2br($post->body) !!}</p>
     </div>
 </div>
 <hr>
