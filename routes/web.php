@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('search', 'SearchController@posts')->name('search.posts');
 
 Route::middleware('auth')->group(function () {
 

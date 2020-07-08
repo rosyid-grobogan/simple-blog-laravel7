@@ -8,6 +8,8 @@ class Post extends Model
 {
     protected $fillable = ['title', 'slug', 'body', 'category_id', 'user_id', 'thumbnail'];
 
+    protected $with = ['author', 'category', 'tags'];
+
     //protected $guarded = [];
     public function scopeLatestFirst()
     {
